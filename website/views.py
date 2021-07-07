@@ -249,7 +249,7 @@ def createProduct(request):
         if form.is_valid():
             form.save()     
             #Mensajes
-            messages.add_message(request, messages.SUCCESS, 'El Producto se ha Correctamente.')
+            messages.add_message(request, messages.SUCCESS, 'El Producto se ha agregado Correctamente.')
             return HttpResponseRedirect(reverse("website:indexProduct"))
     else:
         form = FormProducto()
