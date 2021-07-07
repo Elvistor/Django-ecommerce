@@ -1,0 +1,56 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Inicio{% endblock %}
+{% block content %}
+<!-- Lista de Productos con Imagen -->
+<div class="section text-center">
+    <h2 class="title">Productos</h2>
+    <div class="team">
+        <div class="row">
+            {%for producto in productsTopTen%}
+            <!-- Producto de Muestra  -->
+            <div class="col-md-4">
+                <div class="team-player">
+                    <div class="card card-plain">
+                        <h4 class="card-title">{{ producto.titulo }}
+                        </h4>
+                        <div class="col-md-8 ml-auto mr-auto">
+                            <img height="200" width="200"src="{{ producto.imagen.url }}" alt="{{ producto.imagen.name }}"
+                                class="img-raised rounded">
+                        </div>
+                        <div class="card-footer justify-content-center">
+                            <a href="{% url 'website:showProduct' producto.id %}" class="btn btn-success btn-fab btn-round" data-toggle="tooltip" data-placement="bottom" title="Ver Producto" data-container="body">
+                                <i class="material-icons">visibility</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Producto de Muestra  -->
+            {%empty%}
+            <div class="col-md-12">
+                <h3 class="title">No Hay Productos Disponibles.</h3>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+<!-- Fin Lista de Productos con Imagen -->
+<!-- Lista de Productos sin Imagen -->
+<div class="row">
+    <div class="col-md-12 ml-auto mr-auto">
+        <h3 class="text-center title">Mas Productos</h3>
+        <ul>
+            {%for producto in productsLastTen %}
+            <li>
+                <p><span class="title">{{producto.titulo}} <a href="{% url 'website:showProduct' producto.id %}" data-toggle="tooltip" data-placement="bottom" title="Ver Producto" data-container="body">
+                    <i class="material-icons">visibility</i>
+                </a>: </span>{{producto.descripcion|truncatechars:150}}</p>
+            </li>
+            {% empty %}
+            <li>No hay Productos que Coincidan con {{itemSearch}}.</li>
+            {%endfor%}
+        </ul>
+    </div>
+</div>
+<!-- Fin Lista de Productos sin Imagen -->
+{% endblock %}

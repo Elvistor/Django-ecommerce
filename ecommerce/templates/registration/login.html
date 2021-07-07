@@ -1,0 +1,59 @@
+{% extends "registration/layout.html" %}
+{% block title %} | Iniciar Sesión{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+<div class="alert alert-danger">
+  <div class="container">
+    <div class="alert-icon">
+      <i class="material-icons">error_outline</i>
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true"><i class="material-icons">clear</i></span>
+    </button>
+    <b>¡Ups!:</b> 
+    <p>El usuario y la clave no coinciden, por favor intente nuevamente. </p>
+  </div>
+</div>
+
+{% endif %}
+<div class="row">
+<div class="col-lg-4 col-md-6 ml-auto mr-auto">
+    <div class="card card-login">
+      <form class="form" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="card-header card-header-success text-center">
+          <h4 class="card-title">Iniciar Sesión</h4>
+        </div>
+        <div class="card-body">
+          <div class="input-group">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">mail</i>
+              </span>
+            </div>
+            <input class="form-control" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            <input class="form-control" type="password" name="password" autocomplete="current-password" required="" id="id_password">
+          </div>
+        </div>
+        <div class="container text-center">
+          <a class="text-danger" href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a>
+        </div>
+        <div class="footer text-center">
+          <input type="submit" value="Acceder" class="btn btn-success btn-wd btn-lg"/>
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

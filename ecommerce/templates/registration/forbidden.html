@@ -1,0 +1,18 @@
+{% extends "registration/layout.html" %}
+{% block title %} | Salir{% endblock %}
+{% block content %}
+<div class="alert alert-danger">
+    <div class="container">
+      <div class="alert-icon">
+        <i class="material-icons">error_outline</i>
+      </div>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+      </button>
+      <b>¡Ups!:</b> Parece que no Tienes Permisos.
+    </div>
+  </div>
+  <div class="container text-center">
+    <a class="btn btn-info" href="{% url 'logout'%}">Click aquí salir y Acceder con Otro Usuario.</a>
+  </div>
+{% endblock %}

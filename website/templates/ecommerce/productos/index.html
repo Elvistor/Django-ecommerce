@@ -1,0 +1,48 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Lista Productos{% endblock %}
+{% block content %}
+<!-- Lista de Productos-->
+<div class="section text-center">
+    <h2 class="title">Lista de Productos</h2>
+    <a class="btn btn-success" href="{% url 'website:createProduct' %}"><span class="material-icons">
+        add
+        </span> Agregar Productos</a>
+    <div class="team">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Categoria</th>
+                            <th class="text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td class="text-center">{{producto.titulo}}</td>
+                            <td class="text-center">{{producto.categoria}}</td>
+                            <td class="td-actions text-right">
+                                <a href="{% url 'website:editProduct' producto.id %}" data-toggle="tooltip" title="Editar Producto" data-container="body" class="btn btn-success btn-fab btn-round">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <a href="{% url 'website:deleteProduct' producto.id %}" data-toggle="tooltip" title="Eliminar Producto" data-container="body" class="btn btn-danger btn-fab btn-round">
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td class="text-center" colspan="3">No hay Productos Disponibles.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

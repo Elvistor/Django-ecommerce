@@ -1,0 +1,117 @@
+{% extends "registration/layout.html" %}
+{% block title %} | Registro{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-6 col-md-6 ml-auto mr-auto">
+    <div class="card card-nav-tabs">
+      <div class="card-header card-header-success text-center">
+        <h4 class="card-title">Registro</h4>
+      </div>
+      <form class="form" method="POST">
+        {% csrf_token %}
+        <div class="card-body text-center">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">face</i>
+              </span>
+            </div>
+            {{form.username}}
+          </div>
+          {% if form.username.errors %}
+          {% for error in form.username.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.username.help_text}}</small></p>
+          {% endif %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            {{form.password1}}
+          </div>
+          {% if form.password1.errors %}
+          {% for error in form.password1.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.password1.help_text}}</small>
+          </p>
+          {% endif %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">lock_outline</i>
+              </span>
+            </div>
+            {{form.password2}}
+          </div>
+          {% if form.password2.errors %}
+          {% for error in form.password2.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.password2.help_text}}</small>
+          </p>
+          {% endif %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">badge</i>
+              </span>
+            </div>
+            {{form.first_name}}
+          </div>
+          {% if form.first_name.errors %}
+          {% for error in form.first_name.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.first_name.help_text}}</small>
+          </p>
+          {% endif %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">badge</i>
+              </span>
+            </div>
+            {{form.last_name}}
+          </div>
+          {% if form.last_name.errors %}
+          {% for error in form.last_name.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.last_name.help_text}}</small>
+          </p>
+          {% endif %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">email</i>
+              </span>
+            </div>
+            {{form.email}}
+          </div>
+          {% if form.email.errors %}
+          {% for error in form.email.errors %}
+          <p class="card-text"><small class="form-text text-danger">{{error}}</small></p>
+          {% endfor %}
+          {% else %}
+          <p class="card-text"><small id="userHelp" class="form-text text-muted">{{form.email.help_text}}</small>
+          </p>
+          {% endif %}
+        </div>
+        <div class="footer text-center">
+          <input type="submit" value="Registrarme" class="btn btn-success btn-wd btn-lg" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

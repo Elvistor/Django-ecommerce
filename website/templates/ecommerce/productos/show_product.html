@@ -1,0 +1,53 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Ver Producto{% endblock %}
+{% block content %}
+<div class="section text-center">
+    <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title">Producto: {{producto.titulo}}</h2>
+        </div>
+    </div>
+    <div class="features">
+        <div class="row">
+            <div class="col-md-4">
+                <img height="400" width="400" src="{{ producto.imagen.url }}" alt="{{ producto.imagen.name }}" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 text-left">
+                        <h3 class="title">Categoria: {{producto.categoria}}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-left">
+                                Descripción:
+                        </h3>
+                        <p class="text-justify">
+                            {{producto.descripcion}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <h3 class="text-left">
+                            Precio: $ {{producto.precio}}
+                    </h3>
+                    </div>
+                    <div class="col-md-6 blockquote text-center">
+                        {% if user.is_authenticated %}
+                        <form  action="{% url 'website:addCarrito' %}" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="product_id" value="{{producto.id}}">
+                            <button type="submit" class="btn btn-success"><i class="material-icons">add_shopping_cart</i> Agregar al Carrito</button>
+                        </form>
+                        {%else%}
+                        <a class="btn btn-warning" href="{% url 'login'%}?next={{request.path}}"><i class="material-icons">add_shopping_cart</i> Inicia Sesión para Agregar a Tu Carrito</a>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

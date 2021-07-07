@@ -1,0 +1,66 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Carrito{% endblock %}
+{% block content %}
+<!-- Lista de Categorías-->
+<div class="section text-center">
+    <h2 class="title">Tu Carrito</h2>
+    <h4 class="title">Ultima Modificación: {{ carrito.updated_at }}</h4>
+    <div class="team">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Titulo</th>
+                            <th class="text-center">Descripción</th>
+                            <th class="text-center">Precio</th>
+                            <th class="text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                        <tr>
+                            <td class="text-center title">{{forloop.counter}}</td>
+                            <td class="text-center">{{producto.titulo}}</td>
+                            <td class="text-center col-6">{{producto.descripcion|truncatechars:100}}</td>
+                            <td class="text-center title">$ {{producto.precio}}</td>
+                            <td class="td-actions text-right">
+                                <a href="{% url 'website:showProduct' producto.id %}" data-toggle="tooltip" title="Ver Producto" data-container="body" class="btn btn-success btn-fab btn-round" target="_blank">
+                                    <i class="material-icons">visibility</i>
+                                </a>
+                                <a href="{% url 'website:deleteProductoCarrito' producto.id %}" data-toggle="tooltip" title="Eliminar del Carrito" data-container="body" class="btn btn-danger btn-fab btn-round">
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td class="text-center" colspan="3">No hay Productos en Tu Carrito.</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3" class="text-right title">Total:</td>
+                            <td colspan="2" class="text-left title">$ {{carrito.total_carrito}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            {% if productos %}
+            <div class="col-md-6 text-right">
+                <form  action="{% url 'website:cleanCarrito' %}" method="POST">
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-danger"><i class="material-icons">remove_shopping_cart</i> Limpiar Carrito</button>
+                    <a href="#" class="btn btn-success">
+                        <i class="material-icons">shopping_basket</i> Finalizar Compra
+                    </a>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Buscar{% endblock %}
+{% block content %}
+<div class="section">
+    <div class="row text-center">
+        <div class="col-md-8 ml-auto mr-auto">
+            <h3 class="title">Listado de Productos que Coinciden con: "{{itemSearch}}"</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 ml-auto mr-auto">
+            <ul>
+                {%for producto in productos %}
+                <li>
+                    <p><span class="title">{{producto.titulo}} <a href="{% url 'website:showProduct' producto.id %}" data-toggle="tooltip" data-placement="bottom" title="Ver Producto" data-container="body">
+                        <i class="material-icons">visibility</i>
+                    </a>: </span>{{producto.descripcion|truncatechars:150}}</p>
+                </li>
+                {% empty %}
+                <li>No hay Productos que Coincidan con {{itemSearch}}.</li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

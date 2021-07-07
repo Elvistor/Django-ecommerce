@@ -1,0 +1,72 @@
+{% extends "ecommerce/layout.html" %}
+{% block title %} | Productos{% endblock %}
+{% block content %}
+<div class="section text-center">
+    <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title">Editar Producto {{producto.titulo}}</h2>
+        </div>
+    </div>
+    <div class="features">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST" class="form" action="{% url 'website:editProduct' producto.id%}" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <div class="form-group">
+                        {{form.titulo}}{{form.titulo.errors}}
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <div class="form-group form-file-upload form-file-multiple">
+                            <input type="file" class="inputFileHidden" name="imagen" id="id_imagen">
+                            <div class="input-group">
+                                <input type="text" class="form-control inputFileVisible" placeholder={{producto.imagen.name}}>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-fab btn-round btn-primary">
+                                        <i class="material-icons">attach_file</i>                                     
+                                    </button>
+                                </span>
+                
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="exampleFormControlSelect1">Categorias</label>
+                        <div class="form-group dropdown nav-item"> 
+                            <div>{{form.categoria}}{{form.categoria.errors}}</div>
+                        </div>
+                      </div>
+                    </div>  
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <img height="200" width="200" src="{{ producto.imagen.url }}" alt="{{ producto.imagen.name }}" class="img-fluid rounded">
+                    </div>
+                      <div class="form-group col-md-6">
+                        <label for="descripcion">Descripción</label>
+                        {{form.descripcion}}{{form.descripcion.errors}}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                        </div>
+                        <div class="form-group col-md-2">
+                          <label for="precio">Precio $</label>
+                          {{form.precio}}{{form.precio.errors}}
+                        </div>
+                        <div class="form-group col-md-4 text-right">
+                          <a class="btn btn-danger" href="{% url 'website:indexProduct' %}"><span class="material-icons">
+                            block
+                            </span> Cancelar</a>
+                            <button type="submit" class="btn btn-success"><span class="material-icons">
+                                add_box
+                                </span> Guardar</button>
+                          </div>
+                    </div>
+                  </form>
+                  
+                  
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
